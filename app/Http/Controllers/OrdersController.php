@@ -44,8 +44,7 @@ class OrdersController extends Controller
      */
     public function store(Product $product, Request $request)
     {
-        //$attributes =  ['user_email' => Auth::user()->email];
-       // $attributes += ['order_id' => Orders::max('order_id') + 1];
+                
         $attributes = $request->validate([
              'product_id' => 'required|numeric',
          ]);
