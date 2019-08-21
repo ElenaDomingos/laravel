@@ -35,7 +35,12 @@ Route::post('/set/user/admin', ['midddleware' => 'auth', 'uses'=>'ManagerUsersCo
 Route::get('/products', ['middleware'=>'auth', 'uses'=>'ProductController@index']);
 Route::get('/products/create', ['middleware'=>'auth', 'uses'=>'ProductController@create']);
 Route::get('/products/list', ['middleware'=>'auth', 'uses'=>'ProductController@show']);
-Route::get('/products/product/{id}', ['middleware' => 'auth', 'uses' => 'ProductController@oneproduct']);
+
+Route::get('/products/product/{id}', 'ProductController@oneproduct');
+//Route::get('/products/product/{id}', ['middleware' => 'auth', 'uses' => 'ProductController@oneproduct']);
+
+
+
 Route::post('/product/{id}/update', ['middleware'=>'auth', 'uses'=>'ProductController@update']);
 Route::post('/product/{id}/edit', ['middleware'=>'auth', 'uses'=>'ProductController@edit']);
 Route::post('/product/{id}/delete', ['middleware'=>'auth', 'uses'=>'ProductController@destroy']);
@@ -46,7 +51,7 @@ Route::post('/category/{id}/edit', ['middleware'=>'auth', 'uses'=>'CategoryContr
 Route::post('/category/{id}/update', ['middleware'=>'auth', 'uses'=>'CategoryController@update']);
 Route::post('/save/categories', ['middleware'=>'auth', 'uses'=>'CategoryController@store']);
 Route::post('/delete/category', ['middleware'=>'auth', 'uses'=>'CategoryController@destroy']);
-Route::post('/order', ['middleware'=>'auth', 'uses'=>'OrdersController@store']);
+Route::post('/order', 'OrdersController@store');
 Route::get('/orders/list', ['middleware'=>'auth', 'uses'=>'OrdersController@index']);
 Route::get('/manage/orders/', ['middleware'=>'auth', 'uses'=>'OrdersController@show']);
 
