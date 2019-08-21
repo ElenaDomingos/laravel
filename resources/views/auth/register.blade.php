@@ -60,6 +60,10 @@
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
                         </div>
+                        <div class="form-group row">
+                           <label  class="col-md-4 col-form-label text-md-right">User: <input type="radio" name="role" value="1" checked> </label>
+                            <label  class="col-md-4 col-form-label text-md-right">Admin: <input type="radio" name="role" value="0"> </label>
+                        </div>
 
                         <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
