@@ -5,7 +5,7 @@ use DB;
 use App\Product;
 use Auth;
 use App\Orders;
-use Mail;
+
 use Illuminate\Http\Request;
 
 class OrdersController extends Controller
@@ -42,25 +42,38 @@ class OrdersController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+
+
+
     public function store(Product $product, Request $request)
     {
-                
+
+        //$attributes =  ['user_email' => Auth::user()->email];
+       // $attributes += ['order_id' => Orders::max('order_id') + 1];
         $attributes = $request->validate([
              'product_id' => 'required|numeric',
+              'email' => 'required|string',
+
          ]);
 
-         $user_email = Auth::user()->email;
+
+
+         $user_email = request('email');
          $order_id = Orders::max('order_id') + 1;
          $product_id = request('product_id');
          $product_name = Product::find($product_id)->name;
          $message = 'Товар ' . $product_name . ' заказан';
+
+        if (Auth::check()) {
+            $user_email = Auth::user()->email;
+        }
 
          DB::table('orders')->insertGetId(
             ['order_id' => $order_id, 'product_id' => $product_id, 'user_email' => $user_email, 'created_at' => now()]);
 
        //Send Email to the Client
 
-Mail::to(\Auth::user())->send(new Send(['product' => $product]));
+     //Mail::to(\Auth::user())->send(new Send(['product' => $product, 'users'=>$user_email]));
       return redirect()->back()->with('message', $message);
 
     }
